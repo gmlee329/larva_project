@@ -14,6 +14,7 @@ var div_price_content = document.getElementById('div_price_content');
 var div_next = document.getElementById('div_next');
 var div_choice_content = document.getElementById('div_choice_content');
 var image = document.getElementById('image');
+var choices = [];
 
 function getCookie(name) {
     let cookieValue = null;
@@ -79,7 +80,7 @@ function setItemAndStandard(result) {
     div_item_content.innerHTML = result['item'][0];
     makeOptions(result['standards'], div_standard_content, getPrice);
     div_item_other_content.innerHTML = result['item'][0];
-    makeOptions(result['item'].slice(1), div_choice_content, getStandard);
+    choices = result['item'].slice(1);
 }
 
 function makeOptions(option_list, parent, onSelect) {
@@ -196,7 +197,10 @@ function getStandard(selected_item) {
         })
         .then(response => response.json())
         .then(result => {
-            removeStandardOptions();
+            removeOptions(div_standard_content);
+            div_price.style.display = 'none';
+            div_count.style.display = 'none';
+            div_next.style.display = 'none';
             setStandard(result);
         })
         .catch(e => {
@@ -211,9 +215,9 @@ function setStandard(result) {
     makeOptions(result['standards'], div_standard_content, getPrice);
 }
 
-function removeStandardOptions() {
-    while(div_standard_content.hasChildNodes()) {
-        div_standard_content.removeChild(div_standard_content.firstChild);
+function removeOptions(parent) {
+    while(parent.hasChildNodes()) {
+        parent.removeChild(parent.firstChild);
     }
 }
 
@@ -274,7 +278,7 @@ function predictCategory() {
         .then(response => response.json())
         .then(result => {
             disablePredictProgress();
-            removeStandardOptions();
+            removeOptions(div_standard_content);
             setItemAndStandard(result);
         })
         .catch(e => {
@@ -287,6 +291,8 @@ function predictCategory() {
 function goToPage2() {
     div_page1.style.display = 'none';
     div_page2.style.display = 'flex';
+    removeOptions(div_choice_content);
+    makeOptions(choices, div_choice_content, getStandard);
 }
 
 function goToPage1() {
