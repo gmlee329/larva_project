@@ -1,0 +1,81 @@
+{% extends "common/base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'disposal/css/disposal.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="container">
+    <div id="div_page1">
+        <div class="div_img">
+            <img id='img' src="{% static 'disposal/img/camera.png' %}">
+        </div>
+        <div class="div_input_file">
+            {% csrf_token %}
+            <label id="label_input_file" for="image">사진 등록</label>
+            <input type="file" id="image" accept="image/*" onchange="setPicture(event);" hidden/>
+        </div>
+        <div class="div_predict" id="div_predict">
+            <button id="button_predict" type='submit' onclick="predictCategory();">
+                분석하기
+            </button>
+        </div>
+        <div class="div_progress" id="div_progress">
+            <div>분석 중..</div>
+        </div>
+        <div class="hide div_item_standard" id="div_item">
+            <div id="div_item_title">품목</div>
+            <div id="div_item_content"></div>
+            <div id="div_item_other" onclick="goToPage2();">
+                <div>혹시&nbsp;</div>
+                <div id="div_item_other_content"></div>
+                <div>(이)가 아닌가요?</div>
+            </div>
+        </div>
+        <div class="hide div_item_standard" id="div_standard">
+            <div id="div_standard_title">규격</div>
+            <div id="div_standard_content"></div>
+        </div>
+        <div class="hide div_item_standard" id="div_price">
+            <div id="div_price_title">가격</div>
+            <div id="div_price_content"></div>
+        </div>
+        <div class="hide div_item_standard" id="div_count">
+            <div id="div_count_title">수량</div>
+            <div class="div_count_content">
+                <div class="div_count_button" id="div_count_minus">
+                    <button id="button_minus" type='button' onclick="countMinus();">
+                        -
+                    </button>
+                </div>
+                <input id="div_count_content" type="text" value="1" maxlength="2">
+                <div class="div_count_button" id="div_count_plus">
+                    <button id="button_plus" type='button' onclick="countPlus();">
+                        +
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="hide div_item_standard" id="div_next">
+            <button id="button_next" type='button' onclick="goToSecondPage();">
+                다음
+            </button>
+        </div>
+    </div>
+    <div id="div_page2">
+        <div class="div_choice" id="div_choice">
+            <div id="div_choice_title">다음 중 어떤 종류인가요?</div>
+            <div id="div_choice_content"></div>
+        </div>
+        <div class="div_typing" id="div_typing">
+            <div id="div_typing_title">직접 입력</div>
+            <div id="div_typing_content"></div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'disposal/js/disposal.js' %}"></script>
+{% endblock js %}

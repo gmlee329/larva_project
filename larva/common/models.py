@@ -79,7 +79,7 @@ class AuthUserUserPermissions(models.Model):
 
 class Charge(models.Model):
     id = models.BigAutoField(primary_key=True)
-    item_id = models.ForeignKey('Item', models.CASCADE)
+    item = models.ForeignKey('Item', models.CASCADE)
     standard = models.CharField(max_length=20)
     price = models.IntegerField()
 
@@ -144,8 +144,8 @@ class Item(models.Model):
 
 class Reservation(models.Model):
     id = models.BigAutoField(primary_key=True)
-    user_id = models.ForeignKey('User', models.CASCADE)
-    charge_id = models.ForeignKey('Charge', models.CASCADE)
+    user = models.ForeignKey('User', models.CASCADE)
+    charge = models.ForeignKey('Charge', models.CASCADE)
     count = models.IntegerField()
     disposal_due_data = models.DateField()
     reservation_date = models.DateField()
