@@ -1,0 +1,80 @@
+.container {
+    /* max-width: 500px; */
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+}
+.div_list {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.div_count {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+.div_card {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.div_id_reservation_date {
+    display: flex;
+    justify-content: space-between;
+}
+.div_id {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    font-size: 20px;
+    font-weight: bold;
+}
+.div_reservation_date {
+    display: flex;
+    justify-content:flex-end;
+    flex-direction: column;
+}
+.reservation_date {
+    display: table-cell;
+    vertical-align: bottom;
+    clear:both;
+}
+.div_info {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+.div_info_content {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.content_box {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+.content_title {
+    width: 60px;
+    text-align: right;
+    margin-right: 10px;
+}
+.content_text {
+    width: 100px;
+}
+.div_enter {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+}
+.div_img {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+#img {
+    width: 100px;
+}

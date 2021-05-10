@@ -1,0 +1,21 @@
+{% extends "common/base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'catalog/css/userInfo.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="container">
+    <div class="div_form">
+        <form class="div_form_content" method="POST" action="{% url 'reservations' %}" autocomplete="on">
+            {% csrf_token %}
+            <label for="name">이름</label>
+            <input id="name" type="text" name="name" maxlength="10" placeholder="홍길동" required>
+            <label for="phone">전화번호</label>
+            <input id="phone" type="tel" name="phone" maxlength="13" placeholder="010-0000-0000" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
+            <input id="submit" type="submit" value="확인">
+        </form>
+    </div>
+</div>
+{% endblock content %}

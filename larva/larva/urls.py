@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 import disposal.views
 import common.views
+import catalog.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('common.urls')),
-    path('disposal/', include('disposal.urls'))
+    path('disposal/', include('disposal.urls')),
+    path('catalog/', include('catalog.urls')),
 ]
