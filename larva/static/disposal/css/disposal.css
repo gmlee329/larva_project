@@ -32,6 +32,12 @@
     flex-direction: row;
 }
 
+.div_item_content_box {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
 .div_progress, .div_predict{
     display: none;
 }

@@ -3,6 +3,9 @@ from django.views import View
 from django.http import HttpResponse, JsonResponse
 from common.models import User, Item, Charge, Reservation
 from disposal.im_utils import *
+import io
+import json
+import requests
 
 # Create your views here.
 def disposal(request):
@@ -14,28 +17,31 @@ class PredictView(View):
         image = request.FILES.get('img')
         image_byte = image.read()
         img = Image.open(io.BytesIO(image_byte))
-        img = img_to_npy(img)
+        img = self.img_to_npy(img)
 
         img = img.tolist()
         test_data = {
             'img' : img
         }
         payload = json.dumps(test_data)
-        response = requests.post(url, data=payload)
+        response = requests.post(api_url, data=payload)
         result = response.json()
         result = result['body']
-        items = ['소파', '냉장고', '장롱', '책상']
-        standard_list = Charge.objects.values('standard').filter(item__name=items[0])
+        items = result['category']
+        selected_standard = result['standard']
+        standard_list = Charge.objects.values('standard').filter(item__name=items[0][0])
         standards = []
         for standard in standard_list:
             standards.append(standard['standard'])
         result = {
             "item" : items,
-            "standards" : standards
+            "standards" : standards,
+            "selected_standard" : selected_standard
         }
 
         return JsonResponse(result)
-    def img_to_npy(img):
+        
+    def img_to_npy(self, img):
         img = check_angle(img)
         img = make_square(img)
         img = img.convert('RGB')

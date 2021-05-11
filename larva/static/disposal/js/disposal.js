@@ -4,6 +4,7 @@ var div_progress = document.getElementById('div_progress');
 var div_predict = document.getElementById('div_predict');
 var div_item = document.getElementById('div_item');
 var div_item_content = document.getElementById('div_item_content');
+var div_item_content_percent = document.getElementById('div_item_content_percent');
 var div_item_other_content = document.getElementById('div_item_other_content');
 var div_standard = document.getElementById('div_standard');
 var div_standard_content = document.getElementById('div_standard_content');
@@ -77,10 +78,11 @@ function Initialization() {
 function setItemAndStandard(result) {
     div_item.style.display = 'flex';
     div_standard.style.display = 'flex';
-    div_item_content.innerHTML = result['item'][0];
+    div_item_content.innerHTML = result['item'][0][0];
+    div_item_content_percent.innerHTML = '&nbsp;Ι&nbsp;' + result['item'][0][1] + '%';
     makeOptions(result['standards'], div_standard_content, getPrice);
-    div_item_other_content.innerHTML = result['item'][0];
-    choices = result['item'].slice(1);
+    div_item_other_content.innerHTML = result['item'][0][0];
+    choices = Array.from(result['item'].slice(1), item => item[0]);
 }
 
 function makeOptions(option_list, parent, onSelect) {
@@ -92,6 +94,16 @@ function makeOptions(option_list, parent, onSelect) {
         };
         parent.appendChild(child);
     }
+}
+
+function onClickStandard(parent, standard) {
+    Array.from(parent.children).forEach(
+        v => {
+            if(v.innerHTML == standard) {
+                v.click();
+            }
+        }
+    );
 }
 
 function selectFunction(parent, child, onSelect){
@@ -280,6 +292,9 @@ function predictCategory() {
             disablePredictProgress();
             removeOptions(div_standard_content);
             setItemAndStandard(result);
+            if(result['selected_standard'] != '') {
+                onClickStandard(div_standard_content, result['selected_standard']);
+            }
         })
         .catch(e => {
             Initialization();
@@ -291,6 +306,7 @@ function predictCategory() {
 function goToPage2() {
     div_page1.style.display = 'none';
     div_page2.style.display = 'flex';
+    div_item_content_percent.innerHTML = '';
     removeOptions(div_choice_content);
     makeOptions(choices, div_choice_content, getStandard);
 }
