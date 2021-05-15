@@ -2,40 +2,39 @@
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'catalog/css/list.css' %}">
+<link rel="stylesheet" href="{% static 'disposal/css/resceipt.css' %}">
 {% endblock css %}
 
 {% block content %}
 <div class="container">
     <div class="div_list">
-        <div class="div_count">
-            <div class="div_count_text">총&nbsp;</div>
-            <div class="div_count_number">{{ reservations|length }}</div>
-            <div class="div_count_text">&nbsp;건</div>
+        <div class="div_complete">
+            <div class="div_comlete_logo">
+                <img id="img" src="{% static 'common/img/larva.png' %}" alt="complete logo">
+            </div>
+            <div class="div_complete_text">
+                접수가 완료되었습니다!
+            </div>
         </div>
         {% for reservation in reservations %}
         <div class="div_card">
-            <div class="div_id_reservation_date">
-                <div class="div_id">
-                    <div class="id_text">[등록번호]&nbsp;</div>
-                    <div class="id">{{ reservation.id }}</div>
-                </div>
-                <div class="div_reservation_date">
-                    <div class="reservation_date">{{ reservation.reservation_date }}</div>
-                </div>
-            </div>
             <div class="div_info">
-                <div class="div_img">
-                    <img id="img" src="data:image/jpg;base64, {{ reservation.item__img }}">
-                </div>
                 <div class="div_info_content">
+                    <div class="content_box">
+                        <div class="content_title_box">
+                            <div class="content_title_left">[</div>
+                            <div class="content_title">등록번호</div>
+                            <div class="content_title_right">]</div>
+                        </div>
+                        <div class="content_text">{{ reservation.id }}</div>
+                    </div>
                     <div class="content_box">
                         <div class="content_title_box">
                             <div class="content_title_left">[</div>
                             <div class="content_title">품목</div>
                             <div class="content_title_right">]</div>
                         </div>
-                        <div class="content_text">{{ reservation.item__name }}</div>
+                        <div class="content_text">{{ reservation.item }}</div>
                     </div>
                     <div class="content_box">
                         <div class="content_title_box">
@@ -43,7 +42,7 @@
                             <div class="content_title">규격</div>
                             <div class="content_title_right">]</div>
                         </div>
-                        <div class="content_text">{{ reservation.charge__standard }}</div>
+                        <div class="content_text">{{ reservation.standard }}</div>
                     </div>
                     <div class="content_box">
                         <div class="content_title_box">
@@ -59,20 +58,15 @@
                             <div class="content_title">총금액</div>
                             <div class="content_title_right">]</div>
                         </div>
-                        <div class="content_text">{{ reservation.total_price }} 원</div>
-                    </div>
-                    <div class="content_box">
-                        <div class="content_title_box">
-                            <div class="content_title_left">[</div>
-                            <div class="content_title">배출일</div>
-                            <div class="content_title_right">]</div>
-                        </div>
-                        <div class="content_text">{{ reservation.disposal_due_data }}</div>
+                        <div class="content_text">{{ reservation.price }} 원</div>
                     </div>
                 </div>
             </div>
         </div>
         {% endfor %}
+        <div class="div_message">
+            등록번호를 폐기물에 부착하여 지정된 장소에 배출하세요.
+        </div>
         <div class="div_enter">
             <a href="{% url 'main' %}">확인</a>
         </div>

@@ -6,8 +6,6 @@ from common.models import User, Item, Charge, Reservation
 import boto3
 import base64
 
-s3 = boto3.client("s3")
-
 # Create your views here.
 def catalog(request):
     return render(request, 'catalog/userInfo.html')
@@ -18,7 +16,7 @@ class ReservationsView(View):
         phone = str(request.POST['phone'])
         bucket = 'larva-bucket'
         file_path = 'images/'
-
+        s3 = boto3.client("s3")
         reservation_list = Reservation.objects.values('id', 'charge__item_id', 'charge__standard', 'charge__price', 'count', 'disposal_due_data', 'reservation_date').filter(user__name=name, user__phone=phone)
         reservations = []
         for reservation in reservation_list:

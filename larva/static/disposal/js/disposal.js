@@ -1,5 +1,8 @@
 var div_page1 = document.getElementById('div_page1');
 var div_page2 = document.getElementById('div_page2');
+var div_page3 = document.getElementById('div_page3');
+var div_page4 = document.getElementById('div_page4');
+
 var div_progress = document.getElementById('div_progress');
 var div_predict = document.getElementById('div_predict');
 var div_item = document.getElementById('div_item');
@@ -12,10 +15,17 @@ var div_count = document.getElementById('div_count');
 var div_count_content = document.getElementById('div_count_content');
 var div_price = document.getElementById('div_price');
 var div_price_content = document.getElementById('div_price_content');
-var div_next = document.getElementById('div_next');
+var div_add = document.getElementById('div_add');
 var div_choice_content = document.getElementById('div_choice_content');
+var selector = document.getElementById('selector');
 var image = document.getElementById('image');
+var div_cards = document.getElementById('div_cards');
+var div_count_number = document.getElementById('div_count_number');
 var choices = [];
+
+document.getElementById('disposal_date').value = new Date().toISOString().substring(0, 10);
+document.getElementById('disposal_date').min = new Date().toISOString().substring(0, 10);
+makeItemOptions();
 
 function getCookie(name) {
     let cookieValue = null;
@@ -57,7 +67,7 @@ function enablePredict() {
     div_standard.style.display = 'none';
     div_price.style.display = 'none';
     div_count.style.display = 'none';
-    div_next.style.display = 'none';
+    div_add.style.display = 'none';
 }
 
 function disablePredictProgress() {
@@ -72,7 +82,7 @@ function Initialization() {
     div_standard.style.display = 'none';
     div_price.style.display = 'none';
     div_count.style.display = 'none';
-    div_next.style.display = 'none';
+    div_add.style.display = 'none';
 }
 
 function setItemAndStandard(result) {
@@ -155,7 +165,7 @@ function getPrice(selected_standard) {
         .then(result => {
             div_price.style.display = 'flex';
             div_count.style.display = 'flex';
-            div_next.style.display = 'flex';
+            div_add.style.display = 'flex';
             setPrice(result);
         })
         .catch(e => {
@@ -212,7 +222,7 @@ function getStandard(selected_item) {
             removeOptions(div_standard_content);
             div_price.style.display = 'none';
             div_count.style.display = 'none';
-            div_next.style.display = 'none';
+            div_add.style.display = 'none';
             setStandard(result);
         })
         .catch(e => {
@@ -303,15 +313,226 @@ function predictCategory() {
         })
 }
 
-function goToPage2() {
-    div_page1.style.display = 'none';
-    div_page2.style.display = 'flex';
-    div_item_content_percent.innerHTML = '';
-    removeOptions(div_choice_content);
-    makeOptions(choices, div_choice_content, getStandard);
+function makeItemOptions() {
+    var items = ['품목', '가스레인지', '냉장고', '밥상', '서랍장', '선풍기', '세탁기', '소파', '안마의자', '에어프라이어', '의자', '장롱', '전기밥솥', '전자레인지', '책상', '침대', '텔레비전', '화장대'];
+    for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        var option = document.createElement("option");
+        option.textContent = item;
+        option.value = item;
+        selector.appendChild(option);
+    }
+    selector.onchange = function() {
+        var selected_option = document.getElementById('selected_option');
+        if (selector.selectedIndex != 0) {
+            selected_option.innerHTML = selector.options[selector.selectedIndex].value;
+            getStandard(selected_option);
+        }
+    }
+}
+
+function addToCart() {
+    var total_count = parseInt(div_count_number.innerHTML);
+    div_count_number.innerHTML = total_count + 1;
+
+    var div_card = document.createElement('div');
+    div_card.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: row\;';
+
+    var card_img = document.createElement('div');
+    card_img.style.cssText = 'display: flex\; align-items: center\; margin-right: 10px\;';
+    var card_img_content = document.createElement('img');
+    card_img_content.src = document.getElementById("img").src;
+    card_img_content.style.cssText = 'width: 100px\;';
+    card_img.appendChild(card_img_content);
+
+    var card_contents = document.createElement('div');
+    card_contents.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: column\;';
+
+    var card_item = document.createElement('div');
+    card_item.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: row\;';
+    var card_item_title = document.createElement('div');
+    card_item_title.innerHTML = '품목 Ι';
+    card_item_title.style.cssText = 'width: 60px\; text-align: right\; margin-right: 10px\;';
+    var card_item_content = document.createElement('div');
+    card_item_content.innerHTML = div_item_content.innerHTML;
+    card_item_content.style.cssText = 'width: 100px\;';
+    card_item.appendChild(card_item_title);
+    card_item.appendChild(card_item_content);
+
+    var card_standard = document.createElement('div');
+    card_standard.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: row\;';
+    var card_standard_title = document.createElement('div');
+    card_standard_title.innerHTML = '규격 Ι';
+    card_standard_title.style.cssText = 'width: 60px\; text-align: right\; margin-right: 10px\;';
+    var card_standard_content = document.createElement('div');
+    var matches = div_standard_content.getElementsByClassName('standard_selected');
+    for (var i=0; i<matches.length; i++) {
+        card_standard_content.innerHTML = matches[i].innerHTML;
+    }
+    card_standard_content.style.cssText = 'width: 100px\;';
+    card_standard.appendChild(card_standard_title);
+    card_standard.appendChild(card_standard_content);
+
+    var card_count = document.createElement('div');
+    card_count.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: row\;';
+    var card_count_title = document.createElement('div');
+    card_count_title.innerHTML = '수량 Ι';
+    card_count_title.style.cssText = 'width: 60px\; text-align: right\; margin-right: 10px\;';
+    var card_count_content = document.createElement('div');
+    card_count_content.innerHTML = div_count_content.value;
+    card_count_content.style.cssText = 'width: 100px\;';
+    card_count.appendChild(card_count_title);
+    card_count.appendChild(card_count_content);
+
+    var card_total_price = document.createElement('div');
+    card_total_price.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: row\;';
+    var card_total_price_title = document.createElement('div');
+    card_total_price_title.innerHTML = '총금액 Ι';
+    card_total_price_title.style.cssText = 'width: 60px\; text-align: right\; margin-right: 10px\;';
+    var card_total_price_content = document.createElement('div');
+    card_total_price_content.innerHTML = parseInt(div_price_content.innerHTML) * parseInt(div_count_content.value);
+    card_total_price_content.style.cssText = 'width: 100px\;';
+    card_total_price.appendChild(card_total_price_title);
+    card_total_price.appendChild(card_total_price_content);
+
+    var card_delete = document.createElement('div');
+    card_delete.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: row\; align-items: center\;';
+    var card_delete_button = document.createElement('div');
+    card_delete_button.innerHTML = '━';
+    card_delete_button.style.cssText = 'display:table-cell\; vertical-align:middle\; clear:both\; text-align:center\; width: 30px\; height: 30px\; border: 1px solid white\; border-radius: 3px\; background-color: #ebebeb\; cursor: pointer\;';
+    card_delete_button.onclick = function() {
+        var total_count = parseInt(div_count_number.innerHTML);
+        div_count_number.innerHTML = total_count - 1;
+        this.parentNode.parentNode.remove();
+    };
+    card_delete.appendChild(card_delete_button);
+
+    card_contents.appendChild(card_item);
+    card_contents.appendChild(card_standard);
+    card_contents.appendChild(card_count);
+    card_contents.appendChild(card_total_price);
+
+    div_card.appendChild(card_img);
+    div_card.appendChild(card_contents);
+    div_card.appendChild(card_delete);
+
+    div_cards.appendChild(div_card);
+
+    div_progress.style.display = 'none';
+    div_predict.style.display = 'none';
+    div_item.style.display = 'none';
+    div_standard.style.display = 'none';
+    div_price.style.display = 'none';
+    div_count.style.display = 'none';
+    div_add.style.display = 'none';
+
+    var img = document.getElementById("img");
+    img.src = "/static/disposal/img/camera.png";
+    div_count_content.value = '1';
 }
 
 function goToPage1() {
     div_page1.style.display = 'flex';
     div_page2.style.display = 'none';
+    div_page3.style.display = 'none';
+    div_page4.style.display = 'none';
+}
+
+function goToPage2() {
+    div_page1.style.display = 'none';
+    div_page2.style.display = 'flex';
+    div_page3.style.display = 'none';
+    div_page4.style.display = 'none';
+    div_item_content_percent.innerHTML = '';
+    removeOptions(div_choice_content);
+    makeOptions(choices, div_choice_content, getStandard);
+}
+
+function goToPage3() {
+    div_page1.style.display = 'none';
+    div_page2.style.display = 'none';
+    div_page3.style.display = 'flex';
+    div_page4.style.display = 'none';
+}
+
+function goToPage4() {
+    div_page1.style.display = 'none';
+    div_page2.style.display = 'none';
+    div_page3.style.display = 'none';
+    div_page4.style.display = 'flex';
+}
+
+async function goToPage5() {
+    try {
+        var items = {};
+        var name = String(document.getElementById('name').value);
+        var phone = String(document.getElementById('phone').value);
+        var address = String(document.getElementById('address').value);
+        var disposal_date = String(document.getElementById('disposal_date').value);
+        name.replace(/\s/gi, "");
+        phone.replace(/\s/gi, "");
+
+        if (name == '' || phone == '' || address == '' || disposal_date == '') {
+            alert("예약자 정보를 입력해주세요.");
+            return
+        }
+
+        items['name'] = name;
+        items['phone'] = phone;
+        items['address'] = address;
+        items['disposal_date'] = disposal_date;
+        items['contents'] = [];
+        Array.from(div_cards.children).forEach(
+            card => {
+                var content = {};
+                var card_img = card.firstChild.firstChild.src;
+                var card_content = card.firstChild.nextSibling;
+                var card_item = card_content.firstChild;
+                var card_item_content = card_item.lastChild.innerHTML;
+                var card_standard = card_item.nextSibling;
+                var card_standard_content = card_standard.lastChild.innerHTML;
+                var card_count = card_standard.nextSibling;
+                var card_count_content = card_count.lastChild.innerHTML;
+                var card_total_price = card_count.nextSibling;
+                var card_total_price_content = card_total_price.lastChild.innerHTML;
+                
+                content['img'] = card_img;
+                content['item_name'] = card_item_content;
+                content['charge_standard'] = card_standard_content;
+                content['reservation_count'] = card_count_content;
+                content['total_price'] = card_total_price_content;
+
+                items['contents'].push(content);
+            }
+        );
+    } catch (e) {
+        alert("요청을 처리할 수 없습니다.");
+        return
+    }
+
+    // const csrftoken = getCookie('csrftoken');
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    payload = JSON.stringify(items);
+
+    await fetch(
+        '/disposal/registration/',
+        {
+            method: 'POST',
+            body: payload,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'same-origin',
+            headers: { "X-CSRFToken": csrftoken },
+        })
+        .then(async response => {
+            return response.text();
+        })
+        .then((html) => {
+            document.body.innerHTML = html;
+        })
+        .catch(e => {
+            alert(e);
+            return
+        })
 }

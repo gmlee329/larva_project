@@ -60,8 +60,13 @@
                 </div>
             </div>
         </div>
-        <div class="hide div_item_standard" id="div_next">
-            <button id="button_next" type='button' onclick="goToSecondPage();">
+        <div class="hide div_item_standard" id="div_add">
+            <button id="button_add" type='button' onclick="addToCart();">
+                추가 하기
+            </button>
+        </div>
+        <div class="flex div_item_standard" >
+            <button id="button_go_1" type='button' onclick="goToPage3();">
                 다음
             </button>
         </div>
@@ -72,8 +77,63 @@
             <div id="div_choice_content"></div>
         </div>
         <div class="div_typing" id="div_typing">
-            <div id="div_typing_title">직접 입력</div>
-            <div id="div_typing_content"></div>
+            <div id="div_typing_title">직접 선택</div>
+            <div id="div_typing_content">
+                <select name="selector" id="selector">
+                </select>
+            </div>
+            <div id="selected_option" hidden></div>
+        </div>
+    </div>
+    <div id="div_page3">
+        <div class="div_count">
+            <div class="div_count_text">총&nbsp;</div>
+            <div class="div_count_number" id="div_count_number">0</div>
+            <div class="div_count_text">&nbsp;건</div>
+        </div>
+        <div class="div_cards" id="div_cards"></div>
+        <div class="flex div_item_standard" >
+            <button id="button_back_3" type='button' onclick="goToPage1();">
+                이전
+            </button>
+        </div>
+        <div class="flex div_item_standard" >
+            <button id="button_go_3" type='button' onclick="goToPage4();">
+                다음
+            </button>
+        </div>
+    </div>
+    <div id="div_page4">
+        <div class="div_user_info_title">
+            예약자 정보 입력
+        </div>
+        <div class="div_user_info">
+            <div class="div_user_name">
+                <div class="div_titles">이름</div>
+                <input id="name" type="text" name="name" maxlength="10" placeholder="홍길동" autocomplete="on" required>
+            </div>
+            <div class="div_user_phone">
+                <div class="div_titles">전화번호</div>
+                <input id="phone" type="tel" name="phone" maxlength="13" placeholder="010-0000-0000" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" autocomplete="on" required>
+            </div>
+            <div class="div_user_address">
+                <div class="div_titles">주소</div>
+                <input id="address" type="text" name="address" maxlength="60" placeholder="시 군 구 상세주소" autocomplete="on" required>
+            </div>
+            <div class="div_user_disposal_date">
+                <div class="div_titles">배출예정일</div>
+                <input id="disposal_date" type="date" name="disposal_date" value="2021-05-13" min="2021-05-13" autocomplete="on" required>
+            </div>
+            <div class="flex div_item_standard" >
+                <button id="button_back_4" type='button' onclick="goToPage3();">
+                    이전
+                </button>
+            </div>
+            <div class="flex div_item_standard" >
+                <button id="button_go_4" type='button' onclick="goToPage5();">
+                    다음
+                </button>
+            </div>
         </div>
     </div>
 </div>

@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-w&^)!u=kbk$tk3ht!t0x+n!6sp@*d!qe*(aoe(ky27or&a&#qm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -88,8 +88,10 @@ DATABASES = {
         'NAME': 'larva_db',  # db-name
         'USER': 'root', #root
         'PASSWORD': '1234', #비밀번호(반드시 str이어야 합니다.)
-        'HOST': 'mariadb', #공백으로 냅두면 default localhost
-        'PORT': '' #공백으로 냅두면 default 3306
+        'HOST': 'mariadb',
+        # 'PASSWORD': 'password#', #비밀번호(반드시 str이어야 합니다.)
+        # 'HOST': 'larvadb.cqsdhsjxne7m.us-west-2.rds.amazonaws.com', #공백으로 냅두면 default localhost
+        'PORT': '3306' #공백으로 냅두면 default 3306
     }
 }
 
