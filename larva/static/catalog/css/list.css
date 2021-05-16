@@ -14,21 +14,36 @@
     display: flex;
     justify-content: flex-start;
     flex-direction: row;
+    font-size: 19px;
+    padding: 20px 0px 6px 0px;
+    margin-left: 5px;
+    margin-bottom: 20px;
+    width: 135px;
+    border-bottom: 2px solid #a8a8a8;
 }
 .div_card {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
+
+    margin: 5px 0px;
+    padding: 15px 20px;
+    border-radius: 0.3rem;
+    border-top: 1.5px solid #e8e8e8;
+    border-right: 3px solid #a8a8a8;
+    border-bottom: 3px solid #a8a8a8;
+    border-left: 1.5px solid #e8e8e8;
 }
 .div_id_reservation_date {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 20px;
 }
 .div_id {
     display: flex;
     justify-content: flex-start;
     flex-direction: row;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
 }
 .div_reservation_date {
@@ -37,6 +52,9 @@
     flex-direction: column;
 }
 .reservation_date {
+    font-size: 14px;
+    letter-spacing: 0ex;
+    color: #525252;
     display: table-cell;
     vertical-align: bottom;
     clear:both;
@@ -60,6 +78,7 @@
     display: flex;
     justify-content: flex-start;
     flex-direction: row;
+    margin-right: 5px;
 }
 .content_title {
     width: 60px;
@@ -81,5 +100,36 @@
     margin-right: 10px;
 }
 #img {
-    width: 100px;
+    width: 90px;
+    height: 90px;
+    border-radius: 0.3rem;
+    border: 1px solid #CCCCCC;
+}
+#enter {
+    font-size: 16px;
+    text-decoration: none;
+    color: white;
+    background-color: #184517;
+    cursor: pointer;
+
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding: 10px 35px 10px 35px;
+    border-radius: 0.3rem;
+    font-weight: bold;
+}
+
+.div_count_number {
+    font-size: 20px;
+    font-weight: bold;
+    color: #184517;
+}
+
+.id {
+    letter-spacing: 0ex;
+}
+
+.id_text {
+    font-size: 17px;
+    letter-spacing: 0ex;
 }

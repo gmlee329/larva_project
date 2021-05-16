@@ -25,7 +25,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = 'django-insecure-w&^)!u=kbk$tk3ht!t0x+n!6sp@*d!qe*(aoe(ky27or&a&#qm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -87,10 +87,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'larva_db',  # db-name
         'USER': 'root', #root
-        'PASSWORD': '1234', #비밀번호(반드시 str이어야 합니다.)
-        'HOST': 'mariadb',
-        # 'PASSWORD': 'password#', #비밀번호(반드시 str이어야 합니다.)
-        # 'HOST': 'larvadb.cqsdhsjxne7m.us-west-2.rds.amazonaws.com', #공백으로 냅두면 default localhost
+        # 'PASSWORD': '1234', #비밀번호(반드시 str이어야 합니다.)
+        # 'HOST': 'mariadb',
+        'PASSWORD': 'password#', #비밀번호(반드시 str이어야 합니다.)
+        'HOST': 'larvadb.cqsdhsjxne7m.us-west-2.rds.amazonaws.com', #공백으로 냅두면 default localhost
         'PORT': '3306' #공백으로 냅두면 default 3306
     }
 }
@@ -147,3 +147,5 @@ STATIC_ROOT = os.path.join(ROOT_DIR, 'static_root')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 104857600

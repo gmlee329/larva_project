@@ -9,12 +9,12 @@
 <div class="container">
     <div id="div_page1">
         <div class="div_img">
-            <img id='img' src="{% static 'disposal/img/camera.png' %}">
+            <img id='img' src="{% static 'disposal/img/logo_camera.png' %}">
         </div>
         <div class="div_input_file">
             {% csrf_token %}
             <label id="label_input_file" for="image">사진 등록</label>
-            <input type="file" id="image" accept="image/*" onchange="setPicture(event);" hidden/>
+            <input type="file" id="image" accept="image/*" onchange="setPicture(event);" hidden />
         </div>
         <div class="div_predict" id="div_predict">
             <button id="button_predict" type='submit' onclick="predictCategory();">
@@ -22,41 +22,60 @@
             </button>
         </div>
         <div class="div_progress" id="div_progress">
+            <div class="div_img_predict">
+                <img id='img_predict' src="{% static 'disposal/img/logo_predict.gif' %}">
+            </div>
             <div>분석 중..</div>
         </div>
-        <div class="hide div_item_standard" id="div_item">
-            <div id="div_item_title">품목</div>
-            <div class="div_item_content_box">
-                <div id="div_item_content"></div>
-                <div id="div_item_content_percent"></div>
-            </div>
-            <div id="div_item_other" onclick="goToPage2();">
-                <div>혹시&nbsp;</div>
-                <div id="div_item_other_content"></div>
-                <div>(이)가 아닌가요?</div>
-            </div>
-        </div>
-        <div class="hide div_item_standard" id="div_standard">
-            <div id="div_standard_title">규격</div>
-            <div id="div_standard_content"></div>
-        </div>
-        <div class="hide div_item_standard" id="div_price">
-            <div id="div_price_title">가격</div>
-            <div id="div_price_content"></div>
-        </div>
-        <div class="hide div_item_standard" id="div_count">
-            <div id="div_count_title">수량</div>
-            <div class="div_count_content">
-                <div class="div_count_button" id="div_count_minus">
-                    <button id="button_minus" type='button' onclick="countMinus();">
-                        -
-                    </button>
+        <div class="div_item_standard_box">
+            <div class="hide div_item_standard" id="div_item">
+                <div class="div_title_box">
+                    <img class="img_title" src="{% static 'disposal/img/logo_item.png' %}">
+                    <div class="div_title">품목</div>
                 </div>
-                <input id="div_count_content" type="text" value="1" maxlength="2">
-                <div class="div_count_button" id="div_count_plus">
-                    <button id="button_plus" type='button' onclick="countPlus();">
-                        +
-                    </button>
+                <div class="div_item_content_box">
+                    <div id="div_item_content"></div>
+                    <div id="div_item_content_percent"></div>
+                </div>
+                <div id="div_item_other_box">
+                    <div id="div_item_other" onclick="goToPage2();">
+                        <div>혹시&nbsp;</div>
+                        <div id="div_item_other_content"></div>
+                        <div>(이)가 아닌가요?</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hide div_item_standard" id="div_standard">
+                <div class="div_title_box">
+                    <img class="img_title" src="{% static 'disposal/img/logo_size.png' %}">
+                    <div class="div_title">규격</div>
+                </div>
+                <div id="div_standard_content"></div>
+            </div>
+            <div class="hide div_item_standard" id="div_price">
+                <div class="div_title_box">
+                    <img class="img_title" src="{% static 'disposal/img/logo_price.png' %}">
+                    <div class="div_title">가격</div>
+                </div>
+                <div class="div_item_content_box" id="div_price_content"></div>
+            </div>
+            <div class="hide div_item_standard" id="div_count">
+                <div class="div_title_box">
+                    <img class="img_title" src="{% static 'disposal/img/logo_count.png' %}">
+                    <div class="div_title">수량</div>
+                </div>
+                <div class="div_count_content">
+                    <div class="div_count_button" id="div_count_minus">
+                        <button id="button_minus" type='button' onclick="countMinus();">
+                            -
+                        </button>
+                    </div>
+                    <input id="div_count_content" type="text" value="1" maxlength="2">
+                    <div class="div_count_button" id="div_count_plus">
+                        <button id="button_plus" type='button' onclick="countPlus();">
+                            +
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -65,7 +84,7 @@
                 추가 하기
             </button>
         </div>
-        <div class="flex div_item_standard" >
+        <div class="flex div_item_standard">
             <button id="button_go_1" type='button' onclick="goToPage3();">
                 다음
             </button>
@@ -73,11 +92,17 @@
     </div>
     <div id="div_page2">
         <div class="div_choice" id="div_choice">
-            <div id="div_choice_title">다음 중 어떤 종류인가요?</div>
-            <div id="div_choice_content"></div>
+            <div class="div_title_box">
+                <img class="img_title" src="{% static 'disposal/img/logo_choice.png' %}">
+                <div class="div_title" id="div_choice_title">다음 중 어떤 종류인가요?</div>
+            </div>
+                <div id="div_choice_content"></div>
         </div>
         <div class="div_typing" id="div_typing">
-            <div id="div_typing_title">직접 선택</div>
+            <div class="div_title_box">
+                <img class="img_title" src="{% static 'disposal/img/logo_typing.png' %}">
+                <div class="div_title" id="div_typing_title">직접 선택</div>
+            </div>
             <div id="div_typing_content">
                 <select name="selector" id="selector">
                 </select>
@@ -92,49 +117,63 @@
             <div class="div_count_text">&nbsp;건</div>
         </div>
         <div class="div_cards" id="div_cards"></div>
-        <div class="flex div_item_standard" >
-            <button id="button_back_3" type='button' onclick="goToPage1();">
-                이전
-            </button>
-        </div>
-        <div class="flex div_item_standard" >
-            <button id="button_go_3" type='button' onclick="goToPage4();">
-                다음
-            </button>
-        </div>
-    </div>
-    <div id="div_page4">
-        <div class="div_user_info_title">
-            예약자 정보 입력
-        </div>
-        <div class="div_user_info">
-            <div class="div_user_name">
-                <div class="div_titles">이름</div>
-                <input id="name" type="text" name="name" maxlength="10" placeholder="홍길동" autocomplete="on" required>
-            </div>
-            <div class="div_user_phone">
-                <div class="div_titles">전화번호</div>
-                <input id="phone" type="tel" name="phone" maxlength="13" placeholder="010-0000-0000" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" autocomplete="on" required>
-            </div>
-            <div class="div_user_address">
-                <div class="div_titles">주소</div>
-                <input id="address" type="text" name="address" maxlength="60" placeholder="시 군 구 상세주소" autocomplete="on" required>
-            </div>
-            <div class="div_user_disposal_date">
-                <div class="div_titles">배출예정일</div>
-                <input id="disposal_date" type="date" name="disposal_date" value="2021-05-13" min="2021-05-13" autocomplete="on" required>
-            </div>
-            <div class="flex div_item_standard" >
-                <button id="button_back_4" type='button' onclick="goToPage3();">
+        <div class="div_button_box">
+            <div class="flex">
+                <button class="button_shape" id="button_back_3" type='button' onclick="goToPage1();">
                     이전
                 </button>
             </div>
-            <div class="flex div_item_standard" >
-                <button id="button_go_4" type='button' onclick="goToPage5();">
+            <div class="flex">
+                <button class="button_shape" id="button_go_3" type='button' onclick="goToPage4();">
                     다음
                 </button>
             </div>
         </div>
+    </div>
+    <div id="div_page4">
+        <div class="div_text_box">
+            <img id="reserve_img" src="{% static 'disposal/img/logo_check.png' %}" alt="예약">
+            <div class="div_text">
+                예약자 정보 입력&nbsp;
+            </div>
+        </div>
+        <div class="div_user_info">
+            <div class="div_user_info_content">
+                <div class="div_titles">이름</div>
+                <input class="input_box" id="name" type="text" name="name" maxlength="10" placeholder="홍길동" autocomplete="on" required>
+            </div>
+            <div class="div_user_info_content">
+                <div class="div_titles">전화번호</div>
+                <input class="input_box" id="phone" type="text" name="phone" maxlength="13" placeholder="010-0000-0000"
+                    pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" autocomplete="on" required>
+            </div>
+            <div class="div_user_info_content">
+                <div class="div_titles">주소</div>
+                <input class="input_box" id="address" type="text" name="address" maxlength="60" placeholder="시 군 구 상세주소" autocomplete="on"
+                    required>
+            </div>
+            <div class="div_user_info_content">
+                <div class="div_titles">배출예정일</div>
+                <input class="input_box" id="disposal_date" type="date" name="disposal_date" value="2021-05-13" min="2021-05-13"
+                    autocomplete="on" required>
+            </div>
+            <div class="div_button_box">
+                <div class="flex">
+                    <button class="button_shape" id="button_back_4" type='button' onclick="goToPage3();">
+                        이전
+                    </button>
+                </div>
+                <div class="flex">
+                    <button class="button_shape" id="button_go_4" type='button' onclick="goToPage5();">
+                        접수
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="page_wait">
+        <img class="" id="wait" src="{% static 'disposal/img/logo_predict.gif' %}" alt="대기">
+        <p id="wait_text">접수 중..</p>
     </div>
 </div>
 {% endblock content %}

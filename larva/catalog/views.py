@@ -12,6 +12,7 @@ def catalog(request):
 
 class ReservationsView(View):
     def post(self, request):
+
         name = str(request.POST['name'])
         phone = str(request.POST['phone'])
         bucket = 'larva-bucket'
@@ -27,6 +28,7 @@ class ReservationsView(View):
             file_content = file_obj["Body"].read()
             file_content = base64.b64encode(file_content).decode('utf-8')
             reservation = dict(reservation)
+            reservation['id'] = int(reservation['reservation_date'].isoformat().replace("-","")[2:]) + int(reservation['id'])
             reservation['total_price'] = reservation['charge__price'] * reservation['count']
             reservation['disposal_due_data'] = reservation['disposal_due_data'].isoformat()
             reservation['reservation_date'] = reservation['reservation_date'].isoformat()

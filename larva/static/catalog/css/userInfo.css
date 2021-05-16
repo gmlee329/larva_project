@@ -1,5 +1,5 @@
 .container {
-    /* max-width: 500px; */
+    max-width: 375px;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
@@ -10,4 +10,97 @@
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
+    margin-top: 50px;
+}
+
+.label {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding-left: 63px;
+    padding-right: 63px;
+}
+
+.div_input {
+    margin: 0px 60px 40px 60px;
+}
+
+.input_box {
+    width: 100%;
+    height: 35px;
+    padding: 8px;
+    font-family: 'NanumBarunGothic', sans-serif;
+    font-size: 18px;
+    border: 2px solid #5c5c5c;
+    border-radius: 3px; /* iOS 둥근모서리 제거 */ 
+    -webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+    -moz-appearance: none; 
+    appearance: none;
+}
+
+#submit {
+    width: 100px;
+    font-size: 16px;
+    text-decoration: none;
+    color: white;
+    background-color: #184517;
+    cursor: pointer;
+
+    font-family: 'NanumBarunGothic', sans-serif;
+    -webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+    -moz-appearance: none; 
+    appearance: none;
+
+    margin-top: 10px;
+    padding: 10px 35px 10px 35px;
+    border-radius: 0.3rem;
+    font-weight: bold;
+}
+
+.div_submit {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+}
+
+.div_text_box {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 60px;
+}
+
+.div_text {
+    width: 210px;
+}
+
+#img {
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
+}
+
+#page_wait {
+    display: none;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#wait {
+    margin-top: 100px;
+    margin-bottom: 10px;
+    width: 100px;
+    height: 100px;
+}
+
+#wait_text {
+    font-family: 'NanumBarunGothic', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    width: 120px;
 }

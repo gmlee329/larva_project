@@ -7,12 +7,16 @@
 
 {% block content %}
 <div class="container">
-    <h1>애.벌.래!</h1>
-    <img src="{% static 'common/img/larva.png' %}" alt="app main logo"></a>
-    <p></p>
+    <img id="logo_main" src="{% static 'common/img/logo_main.png' %}" alt="app main logo"></a>
     <div class="menu">
-        <a href="{% url 'disposal' %}">배출 예약하기</a>
-        <a href="{% url 'catalog' %}">예약 목록보기</a>
+        <a class="logo_button" href="{% url 'disposal' %}">
+            <img id="disposal" src="{% static 'common/img/logo_reservation.png' %}" alt="배출 예약">
+        </a>
+        <div class="interval">
+        </div>
+        <a class="logo_button" href="{% url 'catalog' %}">
+            <img id="catalog" src="{% static 'common/img/logo_list.png' %}" alt="예약 목록">
+        </a>
     </div>
 </div>
 {% endblock content %}

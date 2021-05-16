@@ -10,7 +10,7 @@
     <div class="div_list">
         <div class="div_complete">
             <div class="div_comlete_logo">
-                <img id="img" src="{% static 'common/img/larva.png' %}" alt="complete logo">
+                <img id="complete_img" src="{% static 'disposal/img/logo_check.png' %}" alt="complete logo">
             </div>
             <div class="div_complete_text">
                 접수가 완료되었습니다!
@@ -18,7 +18,7 @@
         </div>
         {% for reservation in reservations %}
         <div class="div_card">
-            <div class="div_info">
+            <div class="div_info_box">
                 <div class="div_info_content">
                     <div class="content_box">
                         <div class="content_title_box">
@@ -68,7 +68,7 @@
             등록번호를 폐기물에 부착하여 지정된 장소에 배출하세요.
         </div>
         <div class="div_enter">
-            <a href="{% url 'main' %}">확인</a>
+            <a id="enter" href="{% url 'main' %}">확인</a>
         </div>
     </div>
 </div>

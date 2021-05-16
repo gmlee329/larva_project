@@ -7,15 +7,35 @@
 
 {% block content %}
 <div class="container">
-    <div class="div_form">
+    <div id="div_form" class="div_form">
         <form class="div_form_content" method="POST" action="{% url 'reservations' %}" autocomplete="on">
+            <div class="div_text_box">
+                <img id="img" src="{% static 'catalog/img/logo_check.png' %}" alt="예약">
+                <div class="div_text">
+                    예약자 정보 입력&nbsp;
+                </div>
+            </div>
             {% csrf_token %}
-            <label for="name">이름</label>
-            <input id="name" type="text" name="name" maxlength="10" placeholder="홍길동" required>
-            <label for="phone">전화번호</label>
-            <input id="phone" type="tel" name="phone" maxlength="13" placeholder="010-0000-0000" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
-            <input id="submit" type="submit" value="확인">
+            <label class="label" for="name">이름</label>
+            <div class="div_input">
+                <input class="input_box" id="name" type="text" name="name" maxlength="10" placeholder="홍길동" required>
+            </div>
+            <label class="label" for="phone">전화번호</label>
+            <div class="div_input">
+                <input class="input_box" id="phone" type="text" name="phone" maxlength="13" placeholder="010-0000-0000" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
+            </div>
+            <div class="div_submit">
+                <input id="submit" type="submit" value="확인" onclick="wait();">
+            </div>
         </form>
+    </div>
+    <div id="page_wait">
+        <img id="wait" src="{% static 'disposal/img/logo_predict.gif' %}" alt="대기">
+        <p id="wait_text">조회 중..</p>
     </div>
 </div>
 {% endblock content %}
+
+{% block js %}
+<script src="{% static 'catalog/js/userInfo.js' %}"></script>
+{% endblock js %}

@@ -1,19 +1,23 @@
+{% load static %}
 <html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>AI 폐기물 자동분류 서비스</title>
+    <title>애.벌.래! AI 폐기물 자동분류 서비스</title>
+    <link rel="stylesheet" href="{% static 'common/css/base.css' %}">
     {% block css %}
     {% endblock css %}
 </head>
 
 <body>
+    <div class="container_box">
     {% block content %}
     {% endblock content %}
     
     {% block js %}
     {% endblock js %}
+    </div>
 </body>
 
 </html>

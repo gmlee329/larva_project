@@ -99,6 +99,7 @@ function makeOptions(option_list, parent, onSelect) {
     for (var option of option_list) {
         var child = document.createElement('div');
         child.innerHTML = option;
+        child.classList.add('standard_select');
         child.onclick = function(e) {
             selectFunction(parent, this, onSelect);
         };
@@ -118,9 +119,15 @@ function onClickStandard(parent, standard) {
 
 function selectFunction(parent, child, onSelect){
     Array.from(parent.children).forEach(
-        v => v.classList.remove('standard_selected')
+        v => {
+            v.classList.remove('standard_selected');
+            v.classList.add('standard_select');
+        }
     );
-    if(child) child.classList.add('standard_selected');
+    if(child) {
+        child.classList.remove('standard_select');
+        child.classList.add('standard_selected');
+    }
     onSelect(child);
 }
 
@@ -336,70 +343,88 @@ function addToCart() {
     div_count_number.innerHTML = total_count + 1;
 
     var div_card = document.createElement('div');
-    div_card.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: row\;';
+    // div_card.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: row\;';
+    div_card.classList.add('div_info');
 
     var card_img = document.createElement('div');
-    card_img.style.cssText = 'display: flex\; align-items: center\; margin-right: 10px\;';
+    // card_img.style.cssText = 'display: flex\; align-items: center\; margin-right: 10px\;';
+    card_img.classList.add('div_card_img')
     var card_img_content = document.createElement('img');
     card_img_content.src = document.getElementById("img").src;
-    card_img_content.style.cssText = 'width: 100px\;';
+    // card_img_content.style.cssText = 'width: 100px\;';
+    card_img_content.classList.add('card_img');
     card_img.appendChild(card_img_content);
 
     var card_contents = document.createElement('div');
-    card_contents.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: column\;';
+    // card_contents.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: column\;';
+    card_contents.classList.add('div_info_content');
 
     var card_item = document.createElement('div');
-    card_item.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: row\;';
+    // card_item.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: row\;';
+    card_item.classList.add('content_box');
     var card_item_title = document.createElement('div');
-    card_item_title.innerHTML = '품목 Ι';
-    card_item_title.style.cssText = 'width: 60px\; text-align: right\; margin-right: 10px\;';
+    card_item_title.innerHTML = '[&nbsp\;품목&nbsp\;]';
+    // card_item_title.style.cssText = 'width: 60px\; text-align: right\; margin-right: 10px\;';
+    card_item_title.classList.add('content_title');
     var card_item_content = document.createElement('div');
     card_item_content.innerHTML = div_item_content.innerHTML;
-    card_item_content.style.cssText = 'width: 100px\;';
+    // card_item_content.style.cssText = 'width: 100px\;';
+    card_item_content.classList.add('content_text');
     card_item.appendChild(card_item_title);
     card_item.appendChild(card_item_content);
 
     var card_standard = document.createElement('div');
-    card_standard.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: row\;';
+    // card_standard.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: row\;';
+    card_standard.classList.add('content_box');
     var card_standard_title = document.createElement('div');
-    card_standard_title.innerHTML = '규격 Ι';
-    card_standard_title.style.cssText = 'width: 60px\; text-align: right\; margin-right: 10px\;';
+    card_standard_title.innerHTML = '[&nbsp\;규격&nbsp\;]';
+    // card_standard_title.style.cssText = 'width: 60px\; text-align: right\; margin-right: 10px\;';
+    card_standard_title.classList.add('content_title');
     var card_standard_content = document.createElement('div');
     var matches = div_standard_content.getElementsByClassName('standard_selected');
     for (var i=0; i<matches.length; i++) {
         card_standard_content.innerHTML = matches[i].innerHTML;
     }
-    card_standard_content.style.cssText = 'width: 100px\;';
+    // card_standard_content.style.cssText = 'width: 100px\;';
+    card_standard_content.classList.add('content_text');
     card_standard.appendChild(card_standard_title);
     card_standard.appendChild(card_standard_content);
 
     var card_count = document.createElement('div');
-    card_count.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: row\;';
+    // card_count.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: row\;';
+    card_count.classList.add('content_box');
     var card_count_title = document.createElement('div');
-    card_count_title.innerHTML = '수량 Ι';
-    card_count_title.style.cssText = 'width: 60px\; text-align: right\; margin-right: 10px\;';
+    card_count_title.innerHTML = '[&nbsp\;수량&nbsp\;]';
+    // card_count_title.style.cssText = 'width: 60px\; text-align: right\; margin-right: 10px\;';
+    card_count_title.classList.add('content_title');
     var card_count_content = document.createElement('div');
     card_count_content.innerHTML = div_count_content.value;
-    card_count_content.style.cssText = 'width: 100px\;';
+    // card_count_content.style.cssText = 'width: 100px\;';
+    card_count_content.classList.add('content_text');
     card_count.appendChild(card_count_title);
     card_count.appendChild(card_count_content);
 
     var card_total_price = document.createElement('div');
-    card_total_price.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: row\;';
+    // card_total_price.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: row\;';
+    card_total_price.classList.add('content_box');
     var card_total_price_title = document.createElement('div');
-    card_total_price_title.innerHTML = '총금액 Ι';
-    card_total_price_title.style.cssText = 'width: 60px\; text-align: right\; margin-right: 10px\;';
+    card_total_price_title.innerHTML = '[총금액]';
+    // card_total_price_title.style.cssText = 'width: 60px\; text-align: right\; margin-right: 10px\;';
+    card_total_price_title.classList.add('content_title');
     var card_total_price_content = document.createElement('div');
     card_total_price_content.innerHTML = parseInt(div_price_content.innerHTML) * parseInt(div_count_content.value);
-    card_total_price_content.style.cssText = 'width: 100px\;';
+    // card_total_price_content.style.cssText = 'width: 100px\;';
+    card_total_price_content.classList.add('content_text');
     card_total_price.appendChild(card_total_price_title);
     card_total_price.appendChild(card_total_price_content);
 
     var card_delete = document.createElement('div');
-    card_delete.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: row\; align-items: center\;';
+    // card_delete.style.cssText = 'display: flex\; justify-content: flex-start\; flex-direction: row\; align-items: center\;';
+    card_delete.classList.add('card_delete');
     var card_delete_button = document.createElement('div');
-    card_delete_button.innerHTML = '━';
-    card_delete_button.style.cssText = 'display:table-cell\; vertical-align:middle\; clear:both\; text-align:center\; width: 30px\; height: 30px\; border: 1px solid white\; border-radius: 3px\; background-color: #ebebeb\; cursor: pointer\;';
+    card_delete_button.innerHTML = '＿';
+    // card_delete_button.style.cssText = 'display:table-cell\; vertical-align:middle\; clear:both\; text-align:center\; width: 30px\; height: 30px\; border: 1px solid white\; border-radius: 3px\; background-color: #ebebeb\; cursor: pointer\;';
+    card_delete_button.classList.add('card_delete_button');
     card_delete_button.onclick = function() {
         var total_count = parseInt(div_count_number.innerHTML);
         div_count_number.innerHTML = total_count - 1;
@@ -427,7 +452,7 @@ function addToCart() {
     div_add.style.display = 'none';
 
     var img = document.getElementById("img");
-    img.src = "/static/disposal/img/camera.png";
+    img.src = "/static/disposal/img/logo_camera.png";
     div_count_content.value = '1';
 }
 
@@ -470,7 +495,14 @@ async function goToPage5() {
         var address = String(document.getElementById('address').value);
         var disposal_date = String(document.getElementById('disposal_date').value);
         name.replace(/\s/gi, "");
-        phone.replace(/\s/gi, "");
+        address = address.trim();
+
+        var phone_pattern = /[0-9]{3}-[0-9]{4}-[0-9]{4}/;
+        var phone_number = phone;
+        if (!phone_number.match(phone_pattern)) {
+            alert("전화번호를 형식에 맞게 입력해주세요.");
+            return
+        }
 
         if (name == '' || phone == '' || address == '' || disposal_date == '') {
             alert("예약자 정보를 입력해주세요.");
@@ -482,6 +514,10 @@ async function goToPage5() {
         items['address'] = address;
         items['disposal_date'] = disposal_date;
         items['contents'] = [];
+        if (div_cards.children.length == 0) {
+            alert("등록된 품목이 없습니다.");
+            return
+        }
         Array.from(div_cards.children).forEach(
             card => {
                 var content = {};
@@ -510,10 +546,11 @@ async function goToPage5() {
         return
     }
 
+    div_page4.style.display = 'none';
+    document.getElementById('page_wait').style.display = 'flex';
     // const csrftoken = getCookie('csrftoken');
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     payload = JSON.stringify(items);
-
     await fetch(
         '/disposal/registration/',
         {
@@ -529,10 +566,48 @@ async function goToPage5() {
             return response.text();
         })
         .then((html) => {
+            document.getElementById('page_wait').style.display = 'none';
+            div_page4.style.display = 'none';
+            div_page1.style.display = 'none';
+            div_page2.style.display = 'none';
+            div_page3.style.display = 'none';
             document.body.innerHTML = html;
         })
         .catch(e => {
+            document.getElementById('page_wait').style.display = 'none';
+            div_page4.style.display = 'flex';
             alert(e);
             return
         })
+}
+
+var autoHypenPhone = function(str){
+    str = str.replace(/[^0-9]/g, '');
+    var tmp = '';
+    if( str.length < 4){
+        return str;
+    }else if(str.length < 7){
+        tmp += str.substr(0, 3);
+        tmp += '-';
+        tmp += str.substr(3);
+        return tmp;
+    }else if(str.length < 11){
+        tmp += str.substr(0, 3);
+        tmp += '-';
+        tmp += str.substr(3, 3);
+        tmp += '-';
+        tmp += str.substr(6);
+        return tmp;
+    }else{              
+        tmp += str.substr(0, 3);
+        tmp += '-';
+        tmp += str.substr(3, 4);
+        tmp += '-';
+        tmp += str.substr(7);
+        return tmp;
+    }
+}
+
+document.getElementById('phone').onkeyup = function() {
+    this.value = autoHypenPhone(this.value);
 }

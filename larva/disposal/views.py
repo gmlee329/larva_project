@@ -125,14 +125,14 @@ class RegistrationView(View):
             reservation_obj = Reservation.objects.create(user=user, charge=charge, count=reservation_count, disposal_due_data=disposal_date, reservation_date=reservation_date)
             
             reservation = dict()
-            reservation['id'] = reservation_obj.id
+            reservation['id'] = int(reservation_obj.reservation_date.replace("-","")[2:]) + int(reservation_obj.id)
             reservation['item'] = item_name
             reservation['standard'] = charge_standard
             reservation['count'] = reservation_count
             reservation['price'] = content['total_price']
             reservations.append(reservation)
 
-            file_name = str(reservation['id'])
+            file_name = str(reservation_obj.id)
             s3.put_object(Bucket=bucket, Body = img, Key=file_path + file_name)
         
         context = {

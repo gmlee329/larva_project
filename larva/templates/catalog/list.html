@@ -10,7 +10,7 @@
     <div class="div_list">
         <div class="div_count">
             <div class="div_count_text">총&nbsp;</div>
-            <div class="div_count_number">{{ reservations|length }}</div>
+            <div id="div_count_number" class="div_count_number">{{ reservations|length }}</div>
             <div class="div_count_text">&nbsp;건</div>
         </div>
         {% for reservation in reservations %}
@@ -74,7 +74,7 @@
         </div>
         {% endfor %}
         <div class="div_enter">
-            <a href="{% url 'main' %}">확인</a>
+            <a id="enter" href="{% url 'main' %}">확인</a>
         </div>
     </div>
 </div>
