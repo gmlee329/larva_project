@@ -1,0 +1,4 @@
+id,user_id,charge_id,count,disposal_due_date,reservation_date
+1,1,1,2,20200820,20200818
+2,3,10,1,20200520,20200516
+3,2,15,1,20210610,20210608

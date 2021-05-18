@@ -1,0 +1,35 @@
+version: '2'
+
+services: 
+    mariadb:
+        image: mariadb:latest
+        container_name: mariadb
+        environment: 
+            - MYSQL_ROOT_PASSWORD=1234
+        volumes: 
+            - /mnt/d/docker/mariadb/database:/var/lib/mysql
+            - /mnt/d/docker/mariadb/database/conf:/etc/mysql/conf.d
+        ports: 
+            - 3306:3306
+        networks: 
+            - mariadb-network
+        restart: always
+        
+    phpmyadmin:
+        image: phpmyadmin:latest
+        container_name: phpmyadmin
+        environment:
+            - PMA_HOST=mariadb
+            - PMA_PORT=3306
+        volumes: 
+            - /mnt/d/docker/phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config/config.user.inc.php
+        ports:
+            - 8000:80
+        networks: 
+            - mariadb-network
+        restart: always
+
+networks: 
+    mariadb-network:
+        external: 
+            name: mariadb-network
